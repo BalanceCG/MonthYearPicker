@@ -54,7 +54,7 @@ open class MonthYearPickerView: UIControl {
         }
     }
 
-    lazy fileprivate var pickerView: UIPickerView = {
+    lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView(frame: self.bounds)
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -97,7 +97,9 @@ open class MonthYearPickerView: UIControl {
 
     /// if animated is YES, animate the wheels of time to display the new date
     open func setDate(_ date: Date, animated: Bool) {
-        guard let yearRange = calendar.maximumRange(of: .year), let monthRange = calendar.maximumRange(of: .month) else {
+        let yearRange = 1970...2099
+        
+        guard let monthRange = calendar.maximumRange(of: .month) else {
             return
         }
         let month = calendar.component(.month, from: date) - monthRange.lowerBound
