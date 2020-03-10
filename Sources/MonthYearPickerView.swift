@@ -111,7 +111,9 @@ open class MonthYearPickerView: UIControl {
 extension MonthYearPickerView: UIPickerViewDelegate {
     
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard let yearRange = calendar.maximumRange(of: .year), let monthRange = calendar.maximumRange(of: .month) else {
+        let yearRange = 1970...2099
+        
+        guard let monthRange = calendar.maximumRange(of: .month) else {
             return
         }
         var dateComponents = DateComponents()
@@ -141,9 +143,7 @@ extension MonthYearPickerView: UIPickerViewDataSource {
             }
             return range.count
         case .year:
-            guard let range = calendar.maximumRange(of: .year) else {
-                return 0
-            }
+            let range = 1970...2099
             return range.count
         }
         
@@ -165,9 +165,7 @@ extension MonthYearPickerView: UIPickerViewDataSource {
             }
             return monthDateFormatter.string(from: date)
         case .year:
-            guard let range = calendar.maximumRange(of: .year) else {
-                return nil
-            }
+            let range = 1970...2099
             let year = range.lowerBound + row
             var dateComponents = DateComponents()
             dateComponents.year = year
